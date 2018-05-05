@@ -73,6 +73,34 @@ void Polygon::Render(HDC hdc)
     );
 }
 
+void Polygon::DebugRender(HDC hdc)
+{
+    float
+        left = vertexBuffer[0].x,
+        top = vertexBuffer[0].y,
+        right = vertexBuffer[0].x,
+        bottom = vertexBuffer[0].y;
+    for (int i = 0; i < sizeVertex; i++) 
+    {
+        if (left > vertexBuffer[i].x) left = vertexBuffer[i].x;
+        if (right < vertexBuffer[i].x) right = vertexBuffer[i].x;
+        if (top < vertexBuffer[i].y) top = vertexBuffer[i].y;
+        if (bottom > vertexBuffer[i].y) bottom = vertexBuffer[i].y;
+    }
+
+    MoveToEx(hdc, left, bottom, NULL);
+    LineTo(hdc, left, top);
+
+    MoveToEx(hdc, left, bottom, NULL);
+    LineTo(hdc, right, bottom);
+
+    MoveToEx(hdc, right, bottom, NULL);
+    LineTo(hdc, right, top);
+
+    MoveToEx(hdc, right, top, NULL);
+    LineTo(hdc, left, top);
+}
+
 void Polygon::RotateX(float theta)
 {
     for (int i = 0; i < sizeVertex; ++i)

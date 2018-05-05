@@ -21,6 +21,7 @@ namespace cube
         void SetIndexBuffer();
         void SetVertexBuffer();
         void Render(HDC hdc);
+        void DebugRender(HDC hdc);
 
         void RotateX(float theta);
         void RotateY(float theta);
